@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: steeltoe-weatherforecast
+  labels:
+    app.kubernetes.io/part-of: steeltoe-weatherforecast
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: steeltoe-weatherforecast
+spec:
+  template:
+    metadata:
+      annotations:
+        conventions.apps.tanzu.vmware.com/applied-conventions: appliveview-sample/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: steeltoe-weatherforecast
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: steeltoe-weatherforecast
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/supplychaincartography/workloads/steeltoe-weatherforecast-dev@sha256:5fa9adf96fddaf96b4774fd45218abcf739c1e1f67c3337990fc8585d9891de6
+        name: workload
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
