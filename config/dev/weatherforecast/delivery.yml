@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: weatherforecast
+  labels:
+    app.kubernetes.io/part-of: weatherforecast
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: weatherforecast
+spec:
+  template:
+    metadata:
+      annotations:
+        conventions.apps.tanzu.vmware.com/applied-conventions: appliveview-sample/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: weatherforecast
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: weatherforecast
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/supplychaincartography/workloads/weatherforecast-dev@sha256:51fe3eb62b01560e31bcefd5ad557cacc17e74ec997c1f14f76f9b14576b1f60
+        name: workload
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
