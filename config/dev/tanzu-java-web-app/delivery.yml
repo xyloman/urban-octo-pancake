@@ -24,8 +24,6 @@ spec:
           appliveview-sample/app-live-view-appflavours-boot
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
-        kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"tanzu-java-web-app","apps.tanzu.vmware.com/workload-type":"web"},"name":"tanzu-java-web-app","namespace":"dev"},"spec":{"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/sample-accelerators/tanzu-java-web-app"}}}}
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: tanzu-java-web-app
@@ -41,7 +39,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: us-central1-docker.pkg.dev/supplychaincartography/workloads/tanzu-java-web-app-dev@sha256:19fa169d70d7d57a3057aa67b8ab97e572f923feea094452ff27b39efb9e5515
+        image: us-central1-docker.pkg.dev/supplychaincartography/workloads/tanzu-java-web-app-dev@sha256:100de14f490692a5052aa18c1ab6462c8683dbd582971478d88e690e32dc8811
         livenessProbe:
           httpGet:
             path: /livez
