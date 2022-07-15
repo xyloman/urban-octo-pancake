@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: bulletin-board-app-2
+  labels:
+    app.kubernetes.io/part-of: bulletin-board-app-2
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: bulletin-board-app-2
+spec:
+  template:
+    metadata:
+      annotations:
+        conventions.apps.tanzu.vmware.com/applied-conventions: appliveview-sample/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: bulletin-board-app-2
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: bulletin-board-app-2
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/supplychaincartography/workloads/bulletin-board-app-2-dev@sha256:48adaa6f4a96dd4b09c268945c872206f8f55be24c7f0eaf304154ae14abb4d9
+        name: workload
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
